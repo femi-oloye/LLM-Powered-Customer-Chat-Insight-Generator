@@ -38,7 +38,9 @@ Example row from `chat_insights_output.csv`:
 | John Doe   | Hi, my internet hasn't worked for two days. I'm frustrated. | Customer Summary: Internet not working... Sentiment: Frustrated. Suggested Action: Troubleshoot. |
 
 ## 📦 Folder Structure
+
 ```bash
+
 LLM-Powered-Customer-Chat-Insight-Generator/
 │
 ├── data/
@@ -51,7 +53,7 @@ LLM-Powered-Customer-Chat-Insight-Generator/
 ├── requirements.txt              # Python dependencies
 └── README.md                     # Project documentation
 
-
+```
 ## 🚀 How to Run Locally
 
 Clone this repo & run:
@@ -59,7 +61,7 @@ Clone this repo & run:
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
-
+```
 ## 📡 Deployment
 
 This app is deployed on Streamlit Cloud. You can fork and redeploy your own version easily by:
