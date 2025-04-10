@@ -1,0 +1,10 @@
+Customer,Message,AI Insight
+John Doe,"Hi, my internet hasn't worked for two days. I'm frustrated. Please fix it.","Customer Summary: Internet not working for two days
+Sentiment: Frustrated
+Suggested Action: Troubleshoot the internet connection and provide updates to the customer on the progress."
+Jane Smith,This is the third time I’m reporting this billing issue. I want a refund!,"Customer Summary: Reporting billing issue for the third time, requesting a refund.
+Sentiment: Angry
+Suggested Action: Address the billing issue promptly and process a refund for the customer."
+Mark Johnson,Thanks for fixing my line yesterday. Everything works now.,"Customer Summary: Gratitude for previous assistance with a fixed issue.
+Sentiment: Positive
+Suggested Action: Thank the customer for their feedback and encourage them to reach out with any future issues."
