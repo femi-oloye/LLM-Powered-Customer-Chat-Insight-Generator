@@ -87,3 +87,13 @@ The app parses the **Sentiment** and enables filtering, grouping, and visualizat
 - 📁 **Project Packaging for Deployment**
 - 🔁 **Workflow Automation**
 
+## 📸 Screenshots
+
+![App Demo](LLM-Powered-Customer-Chat-Insight-Generator/assest/giphy.mp4)
+
+
+
+## 📬 Contact
+
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/oluwafemi-oloye-a3b772353/)
+
