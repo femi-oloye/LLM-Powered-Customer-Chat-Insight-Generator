@@ -1,4 +1,6 @@
-streamlit 
-pandas
 openai
-dotenv
+pandas
+streamlit
+python-dotenv
+plotly
+SpeechRecognition
