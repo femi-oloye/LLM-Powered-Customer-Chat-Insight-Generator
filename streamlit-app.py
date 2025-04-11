@@ -56,6 +56,20 @@ def extract_keywords(text_list):
     common_words = [word.strip(".,!?") for word in words if len(word) > 3]
     return dict(Counter(common_words).most_common(10))
 
+# Generate suggested action
+def generate_suggested_action(insight, sentiment):
+    # A simple placeholder suggestion mechanism based on sentiment
+    if sentiment == "Positive":
+        return "No action needed. Keep up the good work!"
+    elif sentiment == "Frustrated":
+        return "Suggest offering a discount or quick resolution."
+    elif sentiment == "Angry":
+        return "Apologize and offer a quick resolution to prevent escalation."
+    elif sentiment == "Negative":
+        return "Investigate the issue and offer an appropriate solution."
+    else:
+        return "Monitor the situation and gather more data."
+
 # Transcribe audio
 def transcribe_audio(file):
     recognizer = sr.Recognizer()
@@ -121,11 +135,13 @@ if uploaded_file is not None:
                     prompt = build_prompt(row["Message"], language_choice)
                     insight = get_response(prompt, model_choice)
                     sentiment = extract_sentiment(insight)
+                    suggested_action = generate_suggested_action(insight, sentiment)
                     results.append({
                         "Customer": row["Customer"],
                         "Message": row["Message"],
                         "AI Insight": insight,
-                        "Sentiment": sentiment
+                        "Sentiment": sentiment,
+                        "Suggested Action": suggested_action
                     })
 
                 st.session_state["insight_data"] = pd.DataFrame(results)
@@ -148,7 +164,8 @@ if st.session_state.get("insight_data") is not None:
         "Sentiment": sentiment_counts.index,
         "Percentage": sentiment_counts.values
     })
-    fig_sentiment = px.pie(sentiment_df, names="Sentiment", values="Percentage", title="Sentiment Distribution")
+    fig_sentiment = px.bar(sentiment_df, x="Sentiment", y="Percentage", title="Sentiment Distribution", text="Percentage")
+    fig_sentiment.update_traces(texttemplate="%{text:.2f}%", textposition="outside", marker=dict(color="#4CAF50"))
     st.plotly_chart(fig_sentiment, use_container_width=True)
 
     # Detailed insights
@@ -169,7 +186,8 @@ if st.session_state.get("insight_data") is not None:
                         f"""
                         <div style="background-color:{color}; padding:1rem; border-radius:10px;">
                             <b>AI Insight:</b><br>{insight_html}<br>
-                            <b>Sentiment:</b> {row["Sentiment"]}
+                            <b>Sentiment:</b> {row["Sentiment"]}<br>
+                            <b>Suggested Action:</b> {row["Suggested Action"]}
                         </div>
                         """,
                         unsafe_allow_html=True
@@ -183,11 +201,16 @@ if st.session_state.get("insight_data") is not None:
                     f"""
                     <div style="background-color:{color}; padding:1rem; border-radius:10px;">
                         <b>AI Insight:</b><br>{insight_html}<br>
-                        <b>Sentiment:</b> {row["Sentiment"]}
+                        <b>Sentiment:</b> {row["Sentiment"]}<br>
+                        <b>Suggested Action:</b> {row["Suggested Action"]}
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
+
+    # Display Data Table for Detailed Insights
+    st.subheader("📋 Detailed Insights Table")
+    st.dataframe(filtered_df)
 
     # Download CSV
     csv = filtered_df.to_csv(index=False).encode("utf-8")
